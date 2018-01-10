@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour {
 
@@ -16,7 +17,21 @@ public class PlayerController : MonoBehaviour {
 		if(Input.GetMouseButton(0)){
 			var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			pos.z = 0;
-			transform.position = pos;
+//			transform.position = pos;//瞬間移動
+
+			//1秒で移動
+//			transform.DOMove (
+//				pos,//移動後の座標
+//				1.0f //時間
+//			);
+
+			//一定の速度で移動
+			float dict = Vector3.Distance(pos,transform.position);
+			float rate = 2.0f;
+			transform.DOMove (
+				pos,//移動後の座標
+				dict/rate //時間
+			);
 		}
 	}
 }
